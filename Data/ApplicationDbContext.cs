@@ -15,6 +15,8 @@ namespace RockwellBlog.Data
         }
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Post> Posts { get; set; }
+        public DbSet<RockwellBlog.Models.Comment> Comment { get; set; }
+
 
     }
 }

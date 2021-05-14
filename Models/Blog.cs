@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace RockwellBlog.Models
 {
@@ -23,7 +25,12 @@ namespace RockwellBlog.Models
         [Display(Name = "Update Date")]
         public DateTime? Updated { get; set; }
 
+        public byte[] ImageData { get; set; }
+        public string ContentType { get; set; }
 
+        [NotMapped]
+        [Display(Name="Choose Blog Image")]
+        public IFormFile ImageFile { get; set; }
 
 
         //Navigation properties

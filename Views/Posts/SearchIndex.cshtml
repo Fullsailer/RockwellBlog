@@ -1,0 +1,66 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common
+@using RockwellBlog.Services
+@inject IBlogFileService _fileService
+@model IPagedList<Post>
+
+@{
+    ViewData["Title"] = "Search Results Page";
+}
+
+<!-- Main Content-->
+<div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+        @foreach (var Post in Model)
+        {
+            <div class="post-preview">
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col">
+                                <img class="img-fluid" src="@_fileService.DecodeImage(Post.ImageData, Post.ContentType)" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <a class="btn btn-dark btn-block btn-sm" asp-action="Details" asp-route-id="@Post.Slug">Read Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <a href="post.html">
+                            <h2 class="post-title">@Post.Title</h2>
+                            <h3 class="post-subtitle">@Post.Abstract</h3>
+                        </a>
+                        <p class="post-meta">
+                            Posted by John B Flynn on @Post.Created.ToString("MMM dd, yyyy")
+                        </p>
+                    </div>
+                </div>
+            </div>
+    <hr />
+          }
+    </div>
+</div>
+            
+
+      
+    <div class="row">
+    <div class="col h3">
+        Page@(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+     </div>
+    </div>
+
+    <div class="row">
+        <div class=" col">
+        @Html.PagedListPager(Model, page => Url.Action("SearchIndex", new { page = page, searchString = ViewData["searchString"]}),
+            new PagedListRenderOptions
+            {
+                LiElementClasses = new string[] { "page-item" },
+                PageClasses = new string[] { "page-link"}
+            })
+         </div>
+
+     </div>
+

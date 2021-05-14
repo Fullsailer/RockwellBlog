@@ -7,12 +7,15 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RockwellBlog.Data;
 using RockwellBlog.Models;
+using RockwellBlog.Services;
+
 
 namespace RockwellBlog
 {
@@ -29,15 +32,27 @@ namespace RockwellBlog
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                 options.UseNpgsql(
-                     Configuration.GetConnectionString("DefaultConnection")));
+                 options.UseNpgsql(Connection.GetConnectionString(Configuration)));
             services.AddDatabaseDeveloperPageExceptionFilter();
+           
             services.AddIdentity<BlogUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
               .AddDefaultUI()
               .AddDefaultTokenProviders()
               .AddEntityFrameworkStores<ApplicationDbContext>();
+            
             services.AddControllersWithViews();
             services.AddRazorPages();
+            
+            services.AddScoped<IBlogFileService, BasicFileService>();
+            services.AddScoped<IEmailSender, GmailEmailService>();
+            
+
+
+            services.AddScoped<DataService>();
+            services.AddScoped<BasicSlugService>();
+            services.AddScoped<SearchService>();
+
+            services.AddScoped<HeaderService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,8 +80,15 @@ namespace RockwellBlog
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    name: "SEO_Route",
+                    pattern: "JohnsPosts/SEOFriendly/{slug}",
+                    defaults: new { controller = "Posts", action = "Details"});
+
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                
+                
                 endpoints.MapRazorPages();
             });
         }
