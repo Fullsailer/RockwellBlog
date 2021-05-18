@@ -68,8 +68,8 @@ namespace RockwellBlog.Services
                 LastName = "Flynn",
                 PhoneNumber = "555-1212",
                 EmailConfirmed = true,
-                ImageData = await _fileService.EncodeFileAsync("JasonTwichell.png"),
-                ContentType = "png"
+                ImageData = await _fileService.EncodeFileAsync("John Image.jpg"),
+                ContentType = "jpg"
             };
 
             //await _userManager.CreateAsync(adminUser, "Abc&123!");

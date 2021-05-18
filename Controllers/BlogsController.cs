@@ -51,7 +51,7 @@ namespace RockwellBlog.Controllers
         }
 
         // GET: Blogs/Create
-        [Authorize(Roles = "Adiminstrator")]
+        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             return View();
