@@ -11,9 +11,9 @@ namespace RockwellBlog.Data
     {
         public static string GetConnectionString(IConfiguration configuration)
         {
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            //var connectionString = configuration.GetConnectionString("DefaultConnection");
             var databaseUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
-            return string.IsNullOrEmpty(databaseUrl) ? connectionString : BuildConnectionString(databaseUrl);
+            return string.IsNullOrEmpty(databaseUrl) ? configuration.GetConnectionString("DefaultConnection") : BuildConnectionString(databaseUrl);
         }
 
         private static string BuildConnectionString(string databaseUrl) 
