@@ -68,7 +68,7 @@ namespace RockwellBlog.Services
                 LastName = "Flynn",
                 PhoneNumber = "555-1212",
                 EmailConfirmed = true,
-                ImageData = await _fileService.EncodeFileAsync("John Image.jpg"),
+                ImageData = await _fileService.EncodeFileAsync("JohnImage.jpg"),
                 ContentType = "jpg"
             };
 
