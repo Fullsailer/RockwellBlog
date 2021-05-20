@@ -10,7 +10,7 @@
     <meta name="author" content="" />
     <title>John's Blog - @ViewData["Title"]</title>
 
-    <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="/img/favicon-32x32.png" />
     <!-- Font Awesome icons (free version)-->
     <script src="//use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
@@ -38,7 +38,7 @@
                         <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
                     @*@if (User.IsInRole("Administrator") || User.IsInRole("Moderator"))*@
-                    @if (User.IsInRole("Administrator")) ;
+                    @if (User.IsInRole("Administrator"));
                     <li class="nav-item"><a class="nav-link" href="https://johnbishopflynn.netlify.app/" target="_blank">Contact</a></li>
                 </ul>
                 <ul class="navbar-nav">
