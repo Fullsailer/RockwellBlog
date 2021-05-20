@@ -55,7 +55,7 @@ namespace RockwellBlog.Services
 
         private async Task SeedUsersAsync()
         {
-            if (_context.Users.Any())
+            if (_context.Users.Any(u => u.Email == "JFlynn@Mailinator.com"))
             {
                 return;
             }
@@ -72,8 +72,8 @@ namespace RockwellBlog.Services
                 ContentType = "jpg"
             };
 
-            //await _userManager.CreateAsync(adminUser, "Abc&123!");
-            await _userManager.CreateAsync(adminUser, _configuration["AdminPassword"]);
+            await _userManager.CreateAsync(adminUser, "Abc&123!");
+            //await _userManager.CreateAsync(adminUser, _configuration["AdminPassword"]);
 
             //await _userManager.AddToRoleAsync(adminUser, "Administrator");
             await _userManager.AddToRoleAsync(adminUser, BlogRole.Administrator.ToString());
@@ -81,4 +81,6 @@ namespace RockwellBlog.Services
         }
 
     }
+
+
 }

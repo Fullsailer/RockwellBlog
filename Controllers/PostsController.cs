@@ -16,6 +16,7 @@ namespace RockwellBlog.Controllers
 {
     public class PostsController : Controller
     {
+
         private readonly ApplicationDbContext _context;
         private readonly IBlogFileService _fileService;
         private readonly IConfiguration _configuration;

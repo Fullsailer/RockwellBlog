@@ -37,8 +37,6 @@
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
-                    @*@if (User.IsInRole("Administrator") || User.IsInRole("Moderator"))*@
-                    @if (User.IsInRole("Administrator"));
                     <li class="nav-item"><a class="nav-link" href="https://johnbishopflynn.netlify.app/" target="_blank">Contact</a></li>
                 </ul>
                 <ul class="navbar-nav">
@@ -47,6 +45,14 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/Identity/Account/Login">Login</a>
+                    </li>
+                    @*@if (User.IsInRole("Administrator") || User.IsInRole("Moderator"))*@
+                    @if (User.IsInRole("Administrator")) ;
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Blogs" asp-action="Create">Create Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Posts" asp-action="Create">Create Post</a>
                     </li>
 
                 </ul>

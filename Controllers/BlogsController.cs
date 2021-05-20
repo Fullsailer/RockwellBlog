@@ -51,7 +51,7 @@ namespace RockwellBlog.Controllers
         }
 
         // GET: Blogs/Create
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator, Moderator")]
         public IActionResult Create()
         {
             return View();
@@ -62,6 +62,7 @@ namespace RockwellBlog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("Name,Decription,ImageFile")] Blog blog)
         {
             if (ModelState.IsValid)
@@ -83,6 +84,7 @@ namespace RockwellBlog.Controllers
         }
 
         // GET: Blogs/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -103,6 +105,7 @@ namespace RockwellBlog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Decription,Created,Updated")] Blog blog)
         {
             if (id != blog.Id)
@@ -135,6 +138,7 @@ namespace RockwellBlog.Controllers
         }
 
         // GET: Blogs/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -155,6 +159,7 @@ namespace RockwellBlog.Controllers
         // POST: Blogs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var blog = await _context.Blogs.FindAsync(id);
