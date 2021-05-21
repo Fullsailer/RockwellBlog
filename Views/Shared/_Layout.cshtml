@@ -75,11 +75,11 @@
 
                         @*This is where I will collect the search string from the user*@
                         <form asp-action="SearchIndex" asp-controller="Posts">
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="Input Search" aria-label="Input Search" aria-describedby="basic-addon2">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text" id="basic-addon2">Search</span>
-                                    </div>
+                            <div class="input-group mt-5">
+                                <input type="text" name="SearchTerm" class="form-control" placeholder="Search Term">
+                                <div class="input-group-append">
+                                    <button class="btn btn-warning btn-block btn-sm" type="submit">Search</button>
+                                </div>
                             </div>
                         </form>
                     </div>
