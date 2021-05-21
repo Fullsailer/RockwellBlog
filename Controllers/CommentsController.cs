@@ -67,7 +67,7 @@ namespace RockwellBlog.Controllers
 
                 _context.Add(comment);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Details", "Posts", new { id = comment.Post.Slug });
+                return RedirectToAction("Details", "Posts", new { id = comment.PostId });
             }
 
             return View(comment);
@@ -77,6 +77,7 @@ namespace RockwellBlog.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator, Moderator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -100,6 +101,7 @@ namespace RockwellBlog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator, Moderator")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,PostId,AuthorId,ModeratorId,Body,Created,Moderated,ModeratedBody,ModerationType")] Comment comment)
         {
             if (id != comment.Id)
@@ -134,6 +136,7 @@ namespace RockwellBlog.Controllers
         }
 
         // GET: Comments/Delete/5
+        [Authorize(Roles = "Administrator, Moderator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

@@ -13,6 +13,7 @@ using X.PagedList;
 
 namespace RockwellBlog.Controllers
 {
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

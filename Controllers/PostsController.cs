@@ -14,6 +14,7 @@ using X.PagedList;
 
 namespace RockwellBlog.Controllers
 {
+    [Authorize]
     public class PostsController : Controller
     {
 
@@ -31,7 +32,7 @@ namespace RockwellBlog.Controllers
             _slugService = slugService;
             _searchService = searchService;
         }
-
+        [Authorize(Roles = "Administrator, Moderator")]
         public async Task<ActionResult> BlogPostIndex(int? id)
         {
             if (id == null)
@@ -50,6 +51,7 @@ namespace RockwellBlog.Controllers
         }
 
         // GET: Posts
+        [Authorize(Roles = "Administrator, Moderator")]
         public async Task<IActionResult> Index()
         {
             ViewData["HeaderText"] = "The Post Index";
@@ -90,6 +92,7 @@ namespace RockwellBlog.Controllers
 
 
         // GET: Posts/Details/5
+        [Authorize(Roles = "Administrator, Moderator")]
         public async Task<IActionResult> Details(string slug)
         {
             if (string.IsNullOrEmpty(slug))
@@ -154,6 +157,7 @@ namespace RockwellBlog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator, Moderator")]
         public async Task<IActionResult> Create([Bind("BlogId,Title,Abstract,Content,PublishState,ImageFile")] Post post)
         {
             if (ModelState.IsValid)
@@ -197,6 +201,7 @@ namespace RockwellBlog.Controllers
         }
 
         // GET: Posts/Edit/5
+        [Authorize(Roles = "Administrator, Moderator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -218,6 +223,7 @@ namespace RockwellBlog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator, Moderator")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,BlogId,Title,Abstract,Content,Created,Imagefile,ImageData,Slug,PublishState")] Post post)
         {
             if (id != post.Id)
@@ -270,6 +276,7 @@ namespace RockwellBlog.Controllers
         }
 
         // GET: Posts/Delete/5
+        [Authorize(Roles = "Administrator, Moderator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
