@@ -78,9 +78,26 @@ namespace RockwellBlog.Services
             //await _userManager.AddToRoleAsync(adminUser, "Administrator");
             await _userManager.AddToRoleAsync(adminUser, BlogRole.Administrator.ToString());
 
+            var modUser = new BlogUser()
+            {
+                Email = "JohnFlynn@Mailinator.com",
+                UserName = "JohnFlynn@Mailinator.com",
+                FirstName = "John",
+                LastName = "Flynn",
+                PhoneNumber = "555-1212",
+                EmailConfirmed = true,
+                ImageData = await _fileService.EncodeFileAsync("JohnImage.jpg"),
+                ContentType = "jpg"
+            };
+
+            //await _userManager.CreateAsync(adminUser, "Abc&123!");
+            await _userManager.CreateAsync(modUser, _configuration["AdminPassword"]);
+
+            //await _userManager.AddToRoleAsync(adminUser, "Administrator");
+            await _userManager.AddToRoleAsync(modUser, BlogRole.Moderator.ToString());
+
+
         }
 
     }
-
-
 }
