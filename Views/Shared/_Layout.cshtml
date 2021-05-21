@@ -48,12 +48,21 @@
                     @*@if (User.IsInRole("Administrator") || User.IsInRole("Moderator"))*@
                     @if (User.IsInRole("Administrator"))
                     {
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Blogs" asp-action="Create">Create Blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Posts" asp-action="Create">Create Post</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Blogs" asp-action="Create">Create Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Posts" asp-action="Create">Create Post</a>
+                        </li>
+                    }
+                    @if (User.IsInRole("BlogUser, Administrator, Moderator"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Username" asp-action="Create">User Name</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Logout" asp-action="Create">Logout</a>
+                        </li>
                     }
                 </ul>
 
