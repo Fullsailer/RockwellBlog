@@ -67,7 +67,8 @@ namespace RockwellBlog.Controllers
 
                 _context.Add(comment);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Details", "Posts", new { id = comment.PostId });
+                var post = _context.Posts.FirstOrDefault(p => p.Id == comment.PostId);
+                return RedirectToAction("Details", "Posts", new { slug = post.Slug });
             }
 
             return View(comment);
