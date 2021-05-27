@@ -55,6 +55,7 @@
                             <a class="nav-link" asp-controller="Posts" asp-action="Create">Create Post</a>
                         </li>
                     }
+                    <partial name="_LoginPartial">
                 </ul>
 
             </div>
@@ -75,10 +76,10 @@
 
                         @*This is where I will collect the search string from the user*@
                         <form asp-action="SearchIndex" asp-controller="Posts">
-                            <div class="input-group mt-5">
+                            <div class="form-group input-group mb-3">
                                 <input type="text" name="SearchTerm" class="form-control" placeholder="Search Term">
                                 <div class="input-group-append">
-                                    <button class="btn btn-light btn-block btn-sm" type="submit">Search</button>
+                                    <button class="btn btn-outline-light" type="button">Search</button>
                                 </div>
                             </div>
                         </form>
@@ -89,20 +90,17 @@
     </header>
 
     <!-- Main Content-->
- 
+    @*This is that reset thing I mentioned earlier in class*@
+    @*@{ _headerService.Reset(); }*@
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                @RenderBody()
 
-
-        @*This is that reset thing I mentioned earlier in class*@
-        @*@{ _headerService.Reset(); }*@
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    @RenderBody()
-        
-                    </div>
-                </div>
-            <hr />
+            </div>
         </div>
+        <hr />
+    </div>
     </div>
     <hr />
 
