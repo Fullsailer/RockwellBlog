@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using RockwellBlog.Data;
 using RockwellBlog.Models;
 using RockwellBlog.Services;
@@ -27,6 +28,18 @@ namespace RockwellBlog
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                  options.UseNpgsql(Connection.GetConnectionString(Configuration)));
+            
+            // TODO - Configure a Cross Origin Resource Sharing (CORS) policy
+            services.AddCors(options =>
+           {
+               options.AddPolicy("DefaultPolicy",
+                   builder => builder.AllowAnyOrigin()
+                                     .AllowAnyMethod()
+                                     .AllowAnyHeader());
+           });
+
+            
+            
             services.AddDatabaseDeveloperPageExceptionFilter();
            
             services.AddIdentity<BlogUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -47,6 +60,12 @@ namespace RockwellBlog
             services.AddScoped<SearchService>();
 
             services.AddScoped<HeaderService>();
+
+            services.AddControllersWithViews();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "RocwellBlog", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,6 +82,17 @@ namespace RockwellBlog
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            //TODO - Use a configured Cross Origin Resoure Sharing (CORS) policy
+            app.UseCors("DefaultPolicy");
+            
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+           {
+               c.SwaggerEndpoint("/swagger/v1/swagger.json", "TestAPI v1");
+               c.DocumentTitle = "CF Blog Public API";
+           });
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

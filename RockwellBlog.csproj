@@ -6,10 +6,16 @@
     <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Users\johnb\Desktop\Coder Foundry Code\RockwellBlog\RockwellBlog.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="CoderFoundry_Tools" Version="1.1.0" />
     <PackageReference Include="Mail.dll" Version="3.0.21134.1059" />
     <PackageReference Include="MailKit" Version="2.12.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="5.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.6" />
@@ -23,6 +29,7 @@
     <PackageReference Include="MimeKit" Version="2.12.0" />
     <PackageReference Include="Npgsql" Version="5.0.5" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.6" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
     <PackageReference Include="X.PagedList" Version="8.1.0" />
     <PackageReference Include="X.PagedList.Mvc.Core" Version="8.1.0" />
     <PackageReference Include="X.PagedList.Web.Common" Version="8.0.7" />
