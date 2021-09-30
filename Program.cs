@@ -7,20 +7,36 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using RockwellBlog.Data;
 using RockwellBlog.Services;
 
 namespace RockwellBlog
 {
     public class Program
     {
+        //public static async Task Main(string[] args)
+        //{
+        //    var host = CreateHostBuilder(args).Build();
+        //    var serviceProvider = host.Services.CreateScope().ServiceProvider;
+        //    var dataService = serviceProvider.GetRequiredService<DataService>();
+        //    await dataService.ManageDataAsync();
+        //    host.Run();
+        //}
+
+
         public static async Task Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
-            var serviceProvider = host.Services.CreateScope().ServiceProvider;
-            var dataService = serviceProvider.GetRequiredService<DataService>();
-            await dataService.ManageDataAsync();
+
+            var dbContext = host.Services
+                                .CreateScope().ServiceProvider
+                                .GetRequiredService<ApplicationDbContext>();
+
+            await dbContext.Database.MigrateAsync();
+
             host.Run();
         }
+
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
