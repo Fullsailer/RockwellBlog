@@ -10,7 +10,7 @@ using Microsoft.OpenApi.Models;
 using RockwellBlog.Data;
 using RockwellBlog.Models;
 using RockwellBlog.Services;
-
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace RockwellBlog
 {
@@ -27,7 +27,7 @@ namespace RockwellBlog
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                 options.UseNpgsql(Connection.GetConnectionString(Configuration)));
+                 options.UseNpgsql(DataUtility.GetConnectionString(Configuration)));
             
             // TODO - Configure a Cross Origin Resource Sharing (CORS) policy
             services.AddCors(options =>
